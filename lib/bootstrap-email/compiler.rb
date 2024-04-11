@@ -62,7 +62,7 @@ module BootstrapEmail
         with_html_string: true,
         preserve_reset: false,
         adapter: :nokogiri_fast,
-        output_encoding: 'US-ASCII',
+        output_encoding: Encoding::default_external,
         css_string: css_string
       )
       self.doc = premailer.doc
@@ -107,7 +107,7 @@ module BootstrapEmail
     end
 
     def finalize_document
-      doc.to_html(encoding: 'US-ASCII').tap do |html|
+      doc.to_html(encoding: Encoding::default_external).tap do |html|
         BootstrapEmail::Converter::SupportUrlTokens.replace(html)
         BootstrapEmail::Converter::EnsureDoctype.replace(html)
         BootstrapEmail::Converter::ForceEncoding.replace(html)

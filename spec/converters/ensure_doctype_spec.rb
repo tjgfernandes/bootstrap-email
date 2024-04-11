@@ -13,7 +13,7 @@ RSpec.describe BootstrapEmail::Converter::EnsureDoctype do
         </html>
       HTML
       doc = Nokogiri::HTML(html)
-      html = doc.to_html(encoding: 'US-ASCII')
+      html = doc.to_html(encoding: Encoding::default_external)
       BootstrapEmail::Converter::EnsureDoctype.replace(html)
       expect(html.scan('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">').one?).to eq(true)
     end
@@ -28,7 +28,7 @@ RSpec.describe BootstrapEmail::Converter::EnsureDoctype do
         </html>
       HTML
       doc = Nokogiri::HTML(html)
-      html = doc.to_html(encoding: 'US-ASCII')
+      html = doc.to_html(encoding: Encoding::default_external)
       BootstrapEmail::Converter::EnsureDoctype.replace(html)
       expect(html.scan('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">').one?).to eq(true)
     end

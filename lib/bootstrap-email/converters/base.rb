@@ -27,7 +27,9 @@ module BootstrapEmail
           @cached_templates[file] = string
         end
         locals_hash.each do |key, value|
-          string = string.sub("{{ #{key} }}", value.to_s)
+          if matched = string.match("{{ #{key} }}")
+            string = "#{matched.pre_match}#{value.to_s}#{matched.post_match}"
+          end
         end
         string
       end

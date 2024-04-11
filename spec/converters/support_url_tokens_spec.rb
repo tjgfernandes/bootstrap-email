@@ -15,7 +15,7 @@ RSpec.describe BootstrapEmail::Converter::SupportUrlTokens do
         </html>
       HTML
       doc = Nokogiri::HTML(html)
-      html = doc.to_html(encoding: 'US-ASCII')
+      html = doc.to_html(encoding: Encoding::default_external)
       BootstrapEmail::Converter::SupportUrlTokens.replace(html)
       expect(html.scan('<img src="{{ some_code_here }}">').one?).to eq(true)
       expect(html.scan('<a href="{{ some_code_here }}">Link</a>').one?).to eq(true)
@@ -34,7 +34,7 @@ RSpec.describe BootstrapEmail::Converter::SupportUrlTokens do
         </html>
       HTML
       doc = Nokogiri::HTML(html)
-      html = doc.to_html(encoding: 'US-ASCII')
+      html = doc.to_html(encoding: Encoding::default_external)
       BootstrapEmail::Converter::SupportUrlTokens.replace(html)
       expect(html.scan('<img src="https://example.com/{{ some_code_here }}">').one?).to eq(true)
       expect(html.scan('<a href="{{ some_code_here }}/example/com">Link</a>').one?).to eq(true)
